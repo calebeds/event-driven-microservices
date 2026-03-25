@@ -1,15 +1,13 @@
 package com.eazybytes.customer.service;
 
-import com.eazybytes.customer.command.event.CustomerUpdatedEvent;
 import com.eazybytes.customer.dto.CustomerDto;
-import com.eazybytes.customer.entity.Customer;
 
 public interface ICustomerService {
 
     /**
-     * @param customerEntity - Customer Object
+     * @param customerDto - CustomerDto Object
      */
-    void createCustomer(Customer customerEntity);
+    void createCustomer(CustomerDto customerDto);
 
     /**
      * @param mobileNumber - Input Mobile Number
@@ -18,10 +16,10 @@ public interface ICustomerService {
     CustomerDto fetchCustomer(String mobileNumber);
 
     /**
-     * @param customerUpdatedEvent - CustomerUpdatedEvent Object
+     * @param customerDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
-    boolean updateCustomer(CustomerUpdatedEvent customerUpdatedEvent);
+    boolean updateCustomer(CustomerDto customerDto);
 
     /**
      * @param customerId - Input Customer ID

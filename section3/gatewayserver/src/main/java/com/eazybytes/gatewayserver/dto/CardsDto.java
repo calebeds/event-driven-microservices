@@ -9,15 +9,14 @@ import lombok.Data;
 @Data
 public class CardsDto {
 
-    @NotEmpty(message = "Mobile Number can not be a null or empty")
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile Number must be 10 digits")
+    @NotEmpty(message = "Mobile number cannot be a null or empty")
+    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
     private String mobileNumber;
 
-    @NotEmpty(message = "Card Number can not be a null or empty")
-    @Pattern(regexp = "(^$|[0-9]{12})", message = "CardNumber must be 12 digits")
+    @NotEmpty(message = "Card number cannot be a null or empty")
     private String cardNumber;
 
-    @NotEmpty(message = "CardType can not be a null or empty")
+    @NotEmpty(message = "Card Type cannot be a null or empty")
     private String cardType;
 
     @Positive(message = "Total card limit should be greater than zero")
@@ -26,9 +25,8 @@ public class CardsDto {
     @PositiveOrZero(message = "Total amount used should be equal or greater than zero")
     private int amountUsed;
 
-    @PositiveOrZero(message = "Total available amount should be equal or greater than zero")
+    @PositiveOrZero(message = "Available amount used should be equal or greater than zero")
     private int availableAmount;
 
     private boolean activeSw;
-
 }

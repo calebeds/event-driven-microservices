@@ -6,10 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CustomerSummaryDto {
-
-    private CustomerDto customer;
+    private CustomerDTO customer;
     private AccountsDto account;
-    private LoansDto loan;
-    private CardsDto card;
-
+    private LoanDto loan;
+    private CardsDto cards;
 }

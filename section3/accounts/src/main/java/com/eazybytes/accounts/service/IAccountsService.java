@@ -1,16 +1,14 @@
 package com.eazybytes.accounts.service;
 
-import com.eazybytes.accounts.command.event.AccountUpdatedEvent;
 import com.eazybytes.accounts.dto.AccountsDto;
-import com.eazybytes.accounts.entity.Accounts;
 
 public interface IAccountsService {
 
     /**
      *
-     * @param account - Accounts Object
+     * @param mobileNumber - Input Mobile Number
      */
-    void createAccount(Accounts account);
+    void createAccount(String mobileNumber);
 
     /**
      *
@@ -21,10 +19,10 @@ public interface IAccountsService {
 
     /**
      *
-     * @param event - AccountUpdatedEvent Object
+     * @param accountsDto - AccountsDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
-    boolean updateAccount(AccountUpdatedEvent event);
+    boolean updateAccount(AccountsDto accountsDto);
 
     /**
      *

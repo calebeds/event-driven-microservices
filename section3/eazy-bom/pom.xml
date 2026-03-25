@@ -35,7 +35,6 @@
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <h2.version>2.2.224</h2.version>
         <lombok.version>1.18.34</lombok.version>
-        <axon.version>4.10.1</axon.version>
     </properties>
     <modules>
         <module>common</module>
@@ -86,13 +85,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.axonframework</groupId>
-                <artifactId>axon-bom</artifactId>
-                <version>${axon.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
