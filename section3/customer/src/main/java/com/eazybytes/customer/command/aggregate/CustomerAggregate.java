@@ -1,7 +1,11 @@
 package com.eazybytes.customer.command.aggregate;
 
 import com.eazybytes.customer.command.CreateCustomerCommand;
+import com.eazybytes.customer.command.DeleteCustomerCommand;
+import com.eazybytes.customer.command.UpdateCustomerCommand;
 import com.eazybytes.customer.command.event.CustomerCreatedEvent;
+import com.eazybytes.customer.command.event.CustomerDeletedEvent;
+import com.eazybytes.customer.command.event.CustomerUpdatedEvent;
 import com.eazybytes.customer.entity.Customer;
 import com.eazybytes.customer.exception.CustomerAlreadyExistsException;
 import com.eazybytes.customer.repository.CustomerRepository;
@@ -11,6 +15,8 @@ import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.commandhandling.CommandHandler;
 
 import org.axonframework.spring.stereotype.Aggregate;
+
+import org.axonframework.eventsourcing.EventSourcingHandler;
 
 import org.springframework.beans.BeanUtils;
 
@@ -42,5 +48,41 @@ public class CustomerAggregate {
         BeanUtils.copyProperties(createCustomerCommand, customerCreatedEvent);
 
         AggregateLifecycle.apply(customerCreatedEvent);
+    }
+
+    @EventSourcingHandler
+    public void on(CustomerCreatedEvent customerCreatedEvent) {
+        this.customerId = customerCreatedEvent.getCustomerId();
+        this.name = customerCreatedEvent.getName();
+        this.email = customerCreatedEvent.getEmail();
+        this.mobileNumber = customerCreatedEvent.getMobileNumber();
+        this.activeSw = customerCreatedEvent.isActiveSw();
+    }
+
+    @CommandHandler
+    public void handle(UpdateCustomerCommand updateCustomerCommand) {
+        CustomerUpdatedEvent customerUpdatedEvent = new CustomerUpdatedEvent();
+        BeanUtils.copyProperties(updateCustomerCommand, customerUpdatedEvent);
+
+        AggregateLifecycle.apply(customerUpdatedEvent);
+    }
+
+    @EventSourcingHandler
+    public void on(CustomerUpdatedEvent customerUpdatedEvent) {
+        this.name = customerUpdatedEvent.getName();
+        this.email = customerUpdatedEvent.getEmail();
+    }
+
+    @CommandHandler
+    public void handle(DeleteCustomerCommand deleteCustomerCommand) {
+        CustomerDeletedEvent customerDeletedEvent = new CustomerDeletedEvent();
+        BeanUtils.copyProperties(deleteCustomerCommand, customerDeletedEvent);
+
+        AggregateLifecycle.apply(customerDeletedEvent);
+    }
+
+    @EventSourcingHandler
+    public void on(CustomerDeletedEvent customerDeletedEvent) {
+        this.activeSw = customerDeletedEvent.isActiveSw();
     }
 }
